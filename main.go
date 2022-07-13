@@ -16,7 +16,6 @@ type TickMsg time.Time
 var clockStyle = lg.NewStyle().
 	Bold(true).
 	Foreground(lg.Color("#FFFFFF")).
-	PaddingTop(20).
 	Align(lg.Center)
     
 var timeFormat = "3:04:05 PM"
@@ -118,6 +117,8 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		}
 	case tea.WindowSizeMsg:
 		clockStyle.Width(msg.Width)
+		// Vertically Align to the middle
+		clockStyle.PaddingTop(int(msg.Height / 2)-1)
 		clockStyle.Height(msg.Height)
 		m.help.Width = msg.Width
 	case TickMsg:
